@@ -39,7 +39,7 @@ public class GlobalExceptionHandler implements ErrorController {
 
     @ExceptionHandler({OptimisticLockException.class, ObjectOptimisticLockingFailureException.class, OptimisticLockConflictException.class})
     public ResponseEntity<ErrorResponse> handleOptimisticLock(Exception ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ErrorType.OPTIMISTIC_LOCK_CONFLICT, "Die Ressource wurde zwischenzeitlich von einem anderen Nutzer verändert. " + ex));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponse(ErrorType.OPTIMISTIC_LOCK_CONFLICT, ex.getMessage()));
     }
 
     @ExceptionHandler(TaskLockedException.class)
@@ -55,6 +55,6 @@ public class GlobalExceptionHandler implements ErrorController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneral(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(ErrorType.INTERNAL_ERROR, "Ein interner Fehler ist aufgetreten.", ex));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(ErrorType.INTERNAL_ERROR, ex.getMessage()));
     }
 }
