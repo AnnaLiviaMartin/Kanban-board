@@ -1,6 +1,5 @@
 package de.hsrm.master.concurrency.kanbanboard.exception;
 
-import de.hsrm.master.concurrency.kanbanboard.dto.ErrorResponse;
 import jakarta.persistence.OptimisticLockException;
 import org.springframework.boot.webmvc.error.ErrorController;
 import org.springframework.http.HttpStatus;
